@@ -52,6 +52,12 @@ The same current token has a different correct successor depending on the earlie
 
 So when the current token is `4`, the correct next token is `5` in mode 0 but `3` in mode 1. The task therefore cannot be solved perfectly from the current token alone.
 
+### Loss-mask detail
+
+The starting cycle token is deliberately varied across all six rotations. Therefore the token immediately after the mode token cannot be inferred from the mode alone. The training harness ignores the loss at that first position and evaluates the six cycle transitions, where the target is well-defined and perfect accuracy is possible.
+
+This is important because an unmasked fully shifted target would create contradictory training labels at the mode position.
+
 ## Files
 
 - `raccoon.py` — frozen 244-parameter model definition and parameter-count assertion.
