@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-13",
+  "model": "Raccoon 244-parameter frozen baseline",
+  "implementation": "parallel independent seeds; no cross-seed parameter sharing",
+  "settings": {
+    "seeds": [0, 1, 2, 3, 4, 5],
+    "steps": 5000,
+    "batch_size": 24,
+    "learning_rate": 0.003,
+    "optimizer": "AdamW",
+    "schedule_seed": 999,
+    "random_data_seed": 20261013,
+    "targeted_train_conflict_starts": [2, 3, 4],
+    "heldout_conflict_starts": [5, 6, 7]
+  },
+  "conditions": {
+    "baseline_12": {
+      "n_sequences": 12,
+      "base_accuracy_by_seed": [1.0, 1.0, 1.0, 0.9444444, 0.7777778, 0.9722222],
+      "heldout_mode_accuracy_by_seed": [0.7777778, 0.30555555, 0.19444445, 0.3888889, 0.30555555, 0.30555555],
+      "heldout_trajectory_accuracy_by_seed": [0.1388889, 0.5833333, 0.8055556, 0.25, 0.5277778, 0.6944444],
+      "heldout_mode_mean": 0.37962964,
+      "heldout_trajectory_mean": 0.5
+    },
+    "redundant_plus_120": {
+      "n_sequences": 132,
+      "base_accuracy_by_seed": [1.0, 1.0, 1.0, 0.9444444, 0.7777778, 0.9722222],
+      "heldout_mode_accuracy_by_seed": [0.7777778, 0.30555555, 0.19444445, 0.3888889, 0.30555555, 0.30555555],
+      "heldout_trajectory_accuracy_by_seed": [0.1388889, 0.5833333, 0.8055556, 0.25, 0.5277778, 0.6944444],
+      "heldout_mode_mean": 0.37962964,
+      "heldout_trajectory_mean": 0.5,
+      "note": "The 120 additions are exact copies of the 12 canonical ordinary sequences, so they add sample count but no new support."
+    },
+    "targeted_plus_6": {
+      "n_sequences": 18,
+      "base_accuracy_by_seed": [1.0, 1.0, 1.0, 1.0, 0.875, 1.0],
+      "heldout_mode_accuracy_by_seed": [0.8888889, 0.7222222, 0.8055556, 0.7777778, 0.5, 0.9166667],
+      "heldout_trajectory_accuracy_by_seed": [0.0, 0.19444445, 0.19444445, 0.05555556, 0.41666666, 0.0],
+      "heldout_mode_mean": 0.7685185,
+      "heldout_trajectory_mean": 0.14351852
+    },
+    "random_novel_plus_100": {
+      "n_sequences": 112,
+      "base_accuracy_by_seed": [1.0, 1.0, 0.8611111, 1.0, 0.9166667, 1.0],
+      "heldout_mode_accuracy_by_seed": [0.9444444, 1.0, 0.9166667, 1.0, 0.9166667, 1.0],
+      "heldout_trajectory_accuracy_by_seed": [0.0, 0.0, 0.08333334, 0.0, 0.08333334, 0.0],
+      "heldout_mode_mean": 0.9629629,
+      "heldout_trajectory_mean": 0.027777778
+    }
+  },
+  "interpretation": {
+    "targeted_vs_baseline_mode_gain": 0.38888886,
+    "random_novel_vs_baseline_mode_gain": 0.58333326,
+    "main_observation": "New discriminating variation changes the learned rule; merely duplicating ordinary examples does not. Six targeted counterfactual sequences improved held-out mode-following for all six initializations. One hundred diverse novel histories improved it further."
+  },
+  "caveat": "Six seeds is a pilot, not a precision estimate. The redundant-copy control is intentionally information-free and therefore should not be interpreted as a realistic large-data condition."
+}
