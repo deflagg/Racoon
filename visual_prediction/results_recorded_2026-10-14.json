@@ -1,0 +1,39 @@
+{
+  "experiment": "Raccoon pure visual next-frame prediction",
+  "date": "2026-10-14",
+  "status": "recorded result from research session; exact transient source artifact unavailable in current runtime",
+  "training": {
+    "input": "four grayscale frames",
+    "target": "fifth frame pixels",
+    "object_identities": 4,
+    "motion_rules": 4,
+    "labels_during_training": false,
+    "actions_or_interventions": false,
+    "held_out_object_motion_combinations": true
+  },
+  "recorded_metrics": {
+    "prediction_iou_seen_combinations": 0.6,
+    "prediction_iou_held_out_combinations": 0.55,
+    "held_out_normal_sequence_iou": 0.55,
+    "held_out_reversed_sequence_iou": 0.11,
+    "held_out_repeated_last_frame_iou": 0.21,
+    "future_x_transfer_r2_before_training": 0.48,
+    "future_y_transfer_r2_before_training": 0.44,
+    "future_x_transfer_r2_after_training": 0.9,
+    "future_y_transfer_r2_after_training": 0.91,
+    "object_identity_transfer_accuracy": 0.28,
+    "object_identity_chance_accuracy": 0.25,
+    "motion_rule_readout_early_accuracy": 0.75,
+    "motion_rule_readout_initial_accuracy": 0.66,
+    "motion_rule_readout_final_accuracy": 0.49,
+    "motion_rule_middle_layer_final_accuracy": 0.63
+  },
+  "interpretation": [
+    "The model used temporal history rather than only the last visible frame.",
+    "Predictive visual training reorganized the hidden state to carry a reusable representation of future position.",
+    "Held-out object-motion performance suggests partial compositional generalization rather than exact template memorization.",
+    "Object identity did not become comparably transferable.",
+    "Motion-rule information became more readable early in training and later less readable in the final representation."
+  ],
+  "caveat": "Exact architecture dimensions and training hyperparameters were not preserved in the transcript and are intentionally not reconstructed here."
+}
